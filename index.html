@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jo ken po da rapozinha</title>
+	<link rel="stylesheet" type="text/css" href="cssjokenpo.css">
+</head>
+<body>
+<div class="container">
+  
+  <h1> JO-KEN-PO <BR>
+  DA RAPOZINHA </h1>
+
+
+  <div class="links">
+     <h4><font color="#FF8C00">Regras:pedra>tesoura,tesoura>papel,papel>pedra.</font></h4>
+     <h3>escolha sua arminha:</h3>
+    <button id="pedra">Pedrinha</button>
+    <button id="papel">Papelzinho</button>
+    <button id="tesoura">Tesourinha</button>
+    
+  </div>
+  
+  <div class="computer">
+      <form id="pchoose">
+      <p>
+        <label for="pc">Rapozinha joga:</label>
+        <input type="text" name="pc" readonly>
+      </p>
+    </form>
+  </div>
+ 
+<div class="count">
+    <form id="contar">
+     <label for="vic">Vit:</label>
+     <input type="text" name="vic" readonly>
+      <label for="lose">Derr:</label>
+     <input type="text" name="lose" readonly>
+      <label for="empate">Empt:</label>
+      <input type="text" name="empate" readonly>
+      
+      <input type="reset" value="Reset" id="reset">
+     </form>
+</div>
+  
+<div id="choose">
+    <div class="escolha">
+      <div id="win">
+        <h2 class="h2">Voce ganhou!</h2>
+        <span>Rapozinha esta triste agora</span>
+      </div>  
+  
+      <div id="lose">
+        <h2 class="h2">Voce perdeu!<h2>
+        <span>Rapozinha te chamou de <br>noob fedido</span>
+      </div>
+      <div id="draw">
+        <h2 class="h2">Empatou</h2>
+        <span> Rapozinha quer revanche</span>
+    </div> 
+  
+ </div>
+</div>
+
+<script type="text/javascript">
+var contador   = document.getElementById("contar"),
+    formPc     = document.getElementById("pchoose"),
+    rock       = document.getElementById("pedra"),
+    paper      = document.getElementById("papel"),
+    scissors   = document.getElementById("tesoura"),
+    choose     = document.getElementById("choose"),
+    win        = document.getElementById("win"),
+    lose       = document.getElementById("lose"),
+    empate     = document.getElementById("draw"),
+    resetar    = document.getElementById("reset"),
+    back       = document.getElementById("jogar"),
+    vitoria    = 0,
+    derrota    = 0;
+
+resetar.onclick = function(){
+  formPc.reset();
+  contador.reset();
+
+}
+function winDisappear(){
+    choose.style.display="none";
+    win.style.display="none";
+    lose.style.display="none";
+    empate.style.display="none";
+  }
+
+function delay(){
+  setTimeout(function(){
+    winDisappear()
+  },650);
+}
+
+function showWin(){
+  choose.style.display="block";
+  win.style.display="block";
+  delay();
+}
+
+function showDraw(){
+  choose.style.display="block";
+  empate.style.display="block";
+  delay();
+}
+
+function showLose(){
+  choose.style.display="block";
+  lose.style.display="block";
+  delay();
+}
+
+var compare = function(arma) {
+  
+    var computer = [1,2,3];
+    var random = computer[Math.floor(Math.random()*computer.length)];
+      
+      if (random == 1){
+    computer = "Pedrinha";
+      }else if (random == 2){
+    computer = "Papelzinho";
+      }else{
+    computer = "Tesourinha";
+      }
+  
+  if (arma == "pedra"){
+    if (computer == "Pedrinha"){
+      
+      formPc.pc.value = computer;
+      contador.empate.value = +contador.empate.value + 1;
+      showDraw();
+     
+    } else if (computer == "Papelzinho"){
+      
+       formPc.pc.value = computer;
+      contador.lose.value = +contador.lose.value + 1;
+      showLose();
+      
+    
+    } else {
+      formPc.pc.value = computer;
+      contador.vic.value = +contador.vic.value + 1;
+      showWin();
+ 
+    }
+  }
+  if (arma == "papel"){
+    if (computer == "Pedrinha"){
+      
+      formPc.pc.value = computer;
+      contador.vic.value = +contador.vic.value + 1;
+      showWin();
+      
+    } else if (computer == "Papelzinho"){
+      
+      formPc.pc.value = computer;
+      contador.empate.value = +contador.empate.value + 1;
+      showDraw();
+      
+    } else {
+      formPc.pc.value = computer;
+      contador.lose.value = +contador.lose.value + 1; 
+      showLose();
+    }
+  }
+  if (arma == "tesoura"){
+    if (computer == "Pedrinha"){
+      
+      formPc.pc.value = computer;
+      contador.lose.value = +contador.lose.value + 1;
+      showLose();
+     
+    } else if (computer == "Papelzinho"){
+      
+       formPc.pc.value = computer;
+      contador.vic.value = +contador.vic.value + 1;
+      showWin();
+    
+    } else {
+      formPc.pc.value = computer;
+      contador.empate.value = +contador.empate.value + 1;
+      showDraw();
+   
+    }
+  }
+}
+
+rock.onclick = function(){
+    compare("pedra");
+}
+paper.onclick = function(){
+  compare("papel");
+}
+
+scissors.onclick = function(){
+  compare("tesoura");
+}
+</script>
+</body>
+</html>
